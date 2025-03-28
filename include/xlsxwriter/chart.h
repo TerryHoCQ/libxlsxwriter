@@ -737,6 +737,29 @@ typedef struct lxw_chart_font {
 
 } lxw_chart_font;
 
+/**
+ * @brief Struct to represent Excel chart element layout dimensions.
+ *
+ * todo:
+ */
+typedef struct lxw_chart_layout {
+
+    /** TODO:*/
+    double x;
+
+    /** TODO:*/
+    double y;
+
+    /** TODO:*/
+    double width;
+
+    /** TODO:*/
+    double height;
+
+    uint8_t has_inner;
+
+} lxw_chart_layout;
+
 typedef struct lxw_chart_marker {
 
     uint8_t type;
@@ -751,6 +774,7 @@ typedef struct lxw_chart_legend {
 
     lxw_chart_font *font;
     uint8_t position;
+    lxw_chart_layout *layout;
 
 } lxw_chart_legend;
 
@@ -769,6 +793,7 @@ typedef struct lxw_chart_title {
     lxw_series_range *range;
 
     struct lxw_series_data_point data_point;
+    lxw_chart_layout *layout;
 
 } lxw_chart_title;
 
@@ -1149,8 +1174,10 @@ typedef struct lxw_chart {
     lxw_chart_line *chartarea_line;
     lxw_chart_fill *chartarea_fill;
     lxw_chart_pattern *chartarea_pattern;
+
     lxw_chart_line *plotarea_line;
     lxw_chart_fill *plotarea_fill;
+    lxw_chart_layout *plotarea_layout;
     lxw_chart_pattern *plotarea_pattern;
 
     uint8_t has_drop_lines;
@@ -3280,6 +3307,14 @@ void chart_title_set_name_font(lxw_chart *chart, lxw_chart_font *font);
 void chart_title_off(lxw_chart *chart);
 
 /**
+ * @brief TODO: Add description.
+ *
+ * @param chart  Pointer to a lxw_chart instance to be configured.
+ * @param layout A pointer to a chart #lxw_chart_layout struct.
+ */
+void chart_title_set_layout(lxw_chart *self, lxw_chart_layout * layout);
+
+/**
  * @brief Set the position of the chart legend.
  *
  * @param chart    Pointer to a lxw_chart instance to be configured.
@@ -3316,6 +3351,16 @@ void chart_title_off(lxw_chart *chart);
  *
  */
 void chart_legend_set_position(lxw_chart *chart, uint8_t position);
+
+/**
+ * @brief Set the layout of the chart legend.
+ *
+ * @param chart  Pointer to a lxw_chart instance to be configured.
+ * @param layout A pointer to a chart #lxw_chart_layout struct.
+ *
+ * TODO: Add example and image.
+ */
+void chart_legend_set_layout(lxw_chart *chart, lxw_chart_layout * layout);
 
 /**
  * @brief Set the font properties for a chart legend.
@@ -3483,6 +3528,14 @@ void chart_plotarea_set_fill(lxw_chart *chart, lxw_chart_fill *fill);
  * For more information see #lxw_chart_pattern_type and @ref chart_patterns.
  */
 void chart_plotarea_set_pattern(lxw_chart *chart, lxw_chart_pattern *pattern);
+
+/**
+ * @brief Set the layout of a plotarea. TODO:
+ *
+ * @param chart
+ * @param layout
+ */
+void chart_plotarea_set_layout(lxw_chart *chart, lxw_chart_layout * layout);
 
 /**
  * @brief Set the chart style type.
