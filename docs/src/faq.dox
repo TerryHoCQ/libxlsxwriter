@@ -76,6 +76,24 @@ Excel. It is possible to simulate "AutoFit" by tracking the width of the
 data in the column as your write it.
 
 
+@section faq_password Q. Can I password protect an XlsxWriter xlsx file?
+
+Although it is possible to password protect a worksheet using the Worksheet
+`protect` method it isn't possible to password protect the entire
+workbook/file using XlsxWriter.
+
+The reason for this is that a protected/encrypted xlsx file is in a different
+format from an ordinary xlsx file. This would require a lot of additional work,
+and testing, and isn't something that is on the XlsxWriter roadmap.
+
+However, it is possible to password protect an XlsxWriter generated file using
+a third party open source tool called [msoffice-crypt](https://github.com/herumi/msoffice). This works for macOS, Linux and Windows:
+
+@code
+    msoffice-crypt -e -p password input.xlsx output.xlsx
+@endcode
+
+
 @section faq_faq Q. Do people actually ask these questions frequently, or at all?
 
 Apart from this question, yes.
