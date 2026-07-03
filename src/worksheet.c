@@ -4180,11 +4180,13 @@ _process_bmp(lxw_object_properties *image_props)
         height = 0;
 
     /* Ensure that we read some valid data from the file. */
-    if (width == 0)
+    if (width == 0 || height == 0)
         goto file_error;
 
-    height = LXW_UINT32_HOST(height);
-    width = LXW_UINT32_HOST(width);
+    /* The height can be stored as negative for a top-down DIB so we need to
+     * take the absolute value. */
+    height = (uint32_t) abs(LXW_INT32_HOST(height));
+    width = (uint32_t) LXW_INT32_HOST(width);
 
     /* Set the image metadata. */
     image_props->image_type = LXW_IMAGE_BMP;
