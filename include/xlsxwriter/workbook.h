@@ -1142,6 +1142,9 @@ STATIC lxw_error _store_defined_name(lxw_workbook *self, const char *name,
                                      const char *formula, int16_t index,
                                      uint8_t hidden);
 
+STATIC lxw_error _get_image_properties(lxw_object_properties *image_props);
+STATIC void _free_object_properties(lxw_object_properties *object_property);
+
 #endif /* TESTING */
 
 /* *INDENT-OFF* */
