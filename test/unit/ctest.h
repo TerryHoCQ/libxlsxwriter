@@ -89,10 +89,12 @@ struct ctest {
 #define CTEST_IMPL_TEARDOWN_TPNAME(sname, tname) CTEST_IMPL_NAME(sname##_##tname##_teardown_ptr)
 
 #define CTEST_IMPL_MAGIC (0xdeadbeef)
+/* This is a workaround for an annoying but harmless warning wehn linking the
+ * unit tests on macOS. */
 #ifdef __APPLE__
-#define CTEST_IMPL_SECTION __attribute__ ((used, section ("__DATA, .ctest"), aligned(1)))
+#define CTEST_IMPL_SECTION __attribute__ ((used, section ("__DATA, .ctest"), aligned(sizeof(void *))))
 #else
-#define CTEST_IMPL_SECTION __attribute__ ((used, section (".ctest"), aligned(1)))
+#define CTEST_IMPL_SECTION __attribute__ ((used, section (".ctest"), aligned(sizeof(void *))))
 #endif
 
 #define CTEST_IMPL_STRUCT(sname, tname, tskip, tdata, tsetup, tteardown) \
