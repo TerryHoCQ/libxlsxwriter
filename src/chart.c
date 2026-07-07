@@ -5640,8 +5640,8 @@ chart_series_set_marker_pattern(lxw_chart_series *series,
 lxw_error
 chart_series_set_points(lxw_chart_series *series, lxw_chart_point *points[])
 {
-    uint16_t i = 0;
-    uint16_t point_count = 0;
+    size_t i = 0;
+    size_t point_count = 0;
 
     if (points == NULL)
         return LXW_ERROR_NULL_PARAMETER_IGNORED;
@@ -5711,8 +5711,8 @@ lxw_error
 chart_series_set_labels_custom(lxw_chart_series *series,
                                lxw_chart_data_label *data_labels[])
 {
-    uint16_t i = 0;
-    uint16_t data_label_count = 0;
+    size_t i = 0;
+    size_t data_label_count = 0;
 
     if (data_labels == NULL)
         return LXW_ERROR_NULL_PARAMETER_IGNORED;
