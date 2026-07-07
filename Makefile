@@ -107,10 +107,20 @@ test_const : all
 	$(Q)! $(MAKE) -C test/functional/src CFLAGS=-Wwrite-strings 2>&1 | grep -A 1 "note:"
 
 
-# Run the functional tests.
+# Run the functional tests. Can be run as a subset:
+#   make test_functional PYTESTFILES="test_image" SRCTESTFILES="test_image*.c"
+#
 test_functional : all
 	$(Q)$(MAKE) -C test/functional/src
 	$(Q)$(PYTEST) test/functional -v -k $(PYTESTFILES)
+
+# Similar to `test_functional` above but builds all the test cases into a single
+# executable to avoid a slow link step per test. Can be run as a subset:
+#   make fast_functional PYTESTFILES="test_image" SRCTESTFILES="test_image*.c"
+#
+fast_functional : all
+	$(Q)$(MAKE) -C test/functional/src functional_all
+	$(Q)LXW_FUNCTIONAL_EXE=./functional_all $(PYTEST) test/functional -v -k $(PYTESTFILES)
 
 # Run all tests.
 test_unit : all

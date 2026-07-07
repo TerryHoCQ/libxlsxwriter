@@ -1,5 +1,6 @@
 *.a
 *.o
+*.fo
 *.so
 *.so.*
 *.to
@@ -9,10 +10,13 @@
 *.dll
 *.gcno
 *.gcda
+*.dSYM/
 test_*
 !test_*.c
 !test_*.cpp
 !test_*.py
+test/functional/src/functional_all
+test/functional/src/functional_main.c
 *.tar.gz
 *~
 TAGS

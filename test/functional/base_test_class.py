@@ -30,11 +30,21 @@ class XLSXBaseTest(unittest.TestCase):
     def run_exe_test(self, exe_name, exp_filename=None):
         """Run C exe and compare output xlsx file with the Excel file."""
 
-        # Create the executable command
+        # Create the executable command. When `LXW_FUNCTIONAL_EXE` is set (via
+        # the "make fast_functional" target) all tests are built into a single
+        # executable and the test name is passed as an argument. Otherwise each
+        # test is run as its own executable.
+        fast_exe = os.environ.get('LXW_FUNCTIONAL_EXE')
         if sys.platform == 'win32':
-            command = r'cd test\functional\src && %s.exe' % exe_name
+            if fast_exe:
+                command = r'cd test\functional\src && %s %s' % (fast_exe, exe_name)
+            else:
+                command = r'cd test\functional\src && %s.exe' % exe_name
         else:
-            command = 'cd test/functional/src && ./%s' % exe_name
+            if fast_exe:
+                command = 'cd test/functional/src && %s %s' % (fast_exe, exe_name)
+            else:
+                command = 'cd test/functional/src && ./%s' % exe_name
 
         # Run the C executable to generate the "got" xlsx file.
         got = os.system(command)
